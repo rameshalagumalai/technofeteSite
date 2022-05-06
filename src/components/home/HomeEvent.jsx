@@ -7,13 +7,13 @@ export default function HomeEvent({ first }) {
   return (
     <div className={"carousel-item home-event" + first}>
       <div className="card">
-        <div className="card-body row">
+        <div className="card-body p-0 row">
           <img
             src="https://backlightblog.com/images/2021/04/landscape-photography-header-2000x1310.jpg"
-            className="col-lg-4"
+            className="col-lg-4 p-0"
             alt="event-img"
           />
-          <div className="col-lg-8 pt-2">
+          <div className="col-lg-8 p-4">
             <h5 className="card-title">Nature Event</h5>
             <h6 className="card-subtitle mb-2 text-muted">
               Organized by Gyan the quiz planet

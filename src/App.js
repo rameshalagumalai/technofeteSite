@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Footer from "./components/Footer";
 import EventPage from "./components/EventPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/event' element={<EventPage />} />
           <Route path='/signin' element={<AuthForm />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<ProtectedRoute path='/signin'><Profile /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </Router>
