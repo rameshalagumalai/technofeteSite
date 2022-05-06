@@ -1,15 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar({ loggedIn }) {
-  const navigate = useNavigate();
-
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="/">
           Technofete
         </a>
-        <ul class="navbar-nav ms-auto">
+        <ul className="navbar-nav ms-auto">
           {loggedIn ? (
             <li className="nav-item">
               <Link className="nav-link" to="/profile">
@@ -17,15 +15,10 @@ export default function Navbar({ loggedIn }) {
               </Link>
             </li>
           ) : (
-            <li class="nav-item">
-              <button
-                onClick={() => {
-                  navigate("/signup");
-                }}
-                className="btn btn-primary"
-              >
-                Register
-              </button>
+            <li className="nav-item">
+              <Link to="/signin">
+                <button className="btn btn-primary">Sign In</button>
+              </Link>
             </li>
           )}
         </ul>

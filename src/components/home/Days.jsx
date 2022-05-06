@@ -4,10 +4,10 @@ export default function Days() {
   return (
     <div className="section">
       <h3>Events</h3>
-      <ul class="nav nav-pills nav-fill mb-3" id="myTab" role="tablist">
-        <li class="nav-item m-0" role="presentation">
+      <ul className="nav nav-pills nav-fill mb-3" id="myTab" role="tablist">
+        <li className="nav-item m-0" role="presentation">
           <button
-            class="nav-link active"
+            className="nav-link active"
             id="home-tab"
             data-bs-toggle="tab"
             data-bs-target="#home"
@@ -19,9 +19,9 @@ export default function Days() {
             Day 1
           </button>
         </li>
-        <li class="nav-item m-0" role="presentation">
+        <li className="nav-item m-0" role="presentation">
           <button
-            class="nav-link"
+            className="nav-link"
             id="profile-tab"
             data-bs-toggle="tab"
             data-bs-target="#profile"
@@ -33,9 +33,9 @@ export default function Days() {
             Day 2
           </button>
         </li>
-        <li class="nav-item m-0" role="presentation">
+        <li className="nav-item m-0" role="presentation">
           <button
-            class="nav-link"
+            className="nav-link"
             id="contact-tab"
             data-bs-toggle="tab"
             data-bs-target="#contact"
@@ -48,9 +48,9 @@ export default function Days() {
           </button>
         </li>
       </ul>
-      <div class="tab-content" id="myTabContent">
+      <div className="tab-content" id="myTabContent">
         <div
-          class="tab-pane fade show active"
+          className="tab-pane fade show active"
           id="home"
           role="tabpanel"
           aria-labelledby="home-tab"
@@ -58,7 +58,7 @@ export default function Days() {
           <EventCarousel id={1} />
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="profile"
           role="tabpanel"
           aria-labelledby="profile-tab"
@@ -66,7 +66,7 @@ export default function Days() {
           <EventCarousel id={2} />
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="contact"
           role="tabpanel"
           aria-labelledby="contact-tab"
