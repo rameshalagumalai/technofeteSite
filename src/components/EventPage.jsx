@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import bg2 from "../assets/bg2.jpg";
 
 const EventPage = () => {
+  const [eventStatus, setEventStatus] = useState(false);
   const [eventDetails, setEventDetails] = useState([
     {
       id: 1,
@@ -52,7 +53,7 @@ const EventPage = () => {
         }}
         className="w-100 position-relative"
       >
-        <div className="position-absolute bottom-0 w-100 d-lg-flex d-sm-flex flex-md-row flex-lg-row flex-sm-column justify-content-between align-items-end">
+        <div className="position-absolute bottom-0 w-100 d-lg-flex d-sm-flex flex-md-row flex-lg-row flex-sm-column  justify-content-between align-items-end">
           <div className="">
             <h3 className="fw-bold p-2 text-white">Event Name</h3>
             <p className="fw-semibold p-2 text-white">Conducted by DigiFlash</p>
@@ -89,7 +90,7 @@ const EventPage = () => {
           including versions of Lorem Ipsum
         </p>
       </div>
-      <div class="container-fluid my-lg-5">
+      <div className="container-fluid my-lg-5">
         <div className="row d-flex justify-content-center justify-content-lg-around align-items-center">
           {eventDetails.map((val, key) =>
             val.id <= 3 ? (
@@ -99,7 +100,7 @@ const EventPage = () => {
                 style={{ width: "300px", height: "100px" }}
               >
                 <div className="w-25 text-center">
-                  <i class={`fa fa-${val.obj2} fa-2x`} aria-hidden="true"></i>
+                  <i className={`fa fa-${val.obj2} fa-2x`} aria-hidden="true"></i>
                 </div>
                 <h5 className="w-75">{val.obj1}</h5>
               </div>
@@ -115,7 +116,7 @@ const EventPage = () => {
                 style={{ width: "300px", height: "100px" }}
               >
                 <div className="w-25 text-center">
-                  <i class={`fa fa-${val.obj2} fa-2x`} aria-hidden="true"></i>
+                  <i className={`fa fa-${val.obj2} fa-2x`} aria-hidden="true"></i>
                 </div>
                 <h5 className="w-75">{val.obj1}</h5>
               </div>
@@ -135,61 +136,72 @@ const EventPage = () => {
       </div>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="confirmRegistrationModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="confirmRegistrationModal"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="confirmRegistrationModal">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="confirmRegistrationModal">
                 Confirm Registration
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <p>
-                <strong>Event Name: </strong>Coding Event
-              </p>
-              <p>
-                <strong>Organized By: </strong>DigiFlash
-              </p>
-              <p>
-                <strong>Date: </strong>19 May,2022
-              </p>
-              <p>
-                <strong>Time: </strong>10.00 AM
-              </p>
-
-              <p>
-                <strong>Venue: </strong>A110
-              </p>
-              <p className="text-danger">
-                Note: Once registered, the registration cannot be undone.
-              </p>
+            <div className="modal-body">
+              {eventStatus ? (
+                <p>Successfully Registered</p>
+              ) : (
+                <>
+                  <p>
+                    <strong>Event Name: </strong>Coding Event
+                  </p>
+                  <p>
+                    <strong>Organized By: </strong>DigiFlash
+                  </p>
+                  <p>
+                    <strong>Date: </strong>19 May,2022
+                  </p>
+                  <p>
+                    <strong>Time: </strong>10.00 AM
+                  </p>
+                  <p>
+                    <strong>Venue: </strong>A110
+                  </p>
+                  <p className="text-danger">
+                    Note: Once registered, the registration cannot be undone.
+                  </p>
+                </>
+              )}
             </div>
 
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-              >
-                Confirm
-              </button>
+            <div className="modal-footer">
+              {eventStatus ? (
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    setEventStatus(true);
+                  }}
+                >
+                  Confirm
+                </button>
+              )}
             </div>
           </div>
         </div>

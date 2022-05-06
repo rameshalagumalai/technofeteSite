@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/event' element={<EventPage />} />
-          <Route path='/signup' element={<AuthForm />} />
+          <Route path='/signin' element={<AuthForm />} />
           <Route path='/profile' element={<Profile />} />
         </Routes>
         <Footer />
