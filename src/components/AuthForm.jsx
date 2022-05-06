@@ -66,7 +66,7 @@ function AuthForm() {
             <label htmlFor="rollNumber" className="form-label">
               Roll Number
             </label>
-            <input type="text" className="form-control" id="rollNumber" />
+            <input type="text" className="form-control" id="rollNumber" placeholder="eg: 19BCS010" />
           </div>
           <div className="container-fluid mb-3">
             <label htmlFor="studentName" className="form-label">
