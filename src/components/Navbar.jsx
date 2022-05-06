@@ -11,6 +11,12 @@ export default function Navbar({ loggedIn }) {
         </a>
         <ul class="navbar-nav ms-auto">
           {loggedIn ? (
+            <li className="nav-item">
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
+            </li>
+          ) : (
             <li class="nav-item">
               <button
                 onClick={() => {
@@ -20,12 +26,6 @@ export default function Navbar({ loggedIn }) {
               >
                 Register
               </button>
-            </li>
-          ) : (
-            <li className="nav-item">
-              <Link className="nav-link" to="/profile">
-                Profile
-              </Link>
             </li>
           )}
         </ul>
