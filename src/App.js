@@ -8,24 +8,33 @@ import { useState } from "react";
 import Footer from "./components/Footer";
 import EventPage from "./components/EventPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/authContext";
 
 function App() {
-
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <div className="App">
-      <Router>
-        <Navbar loggedIn={loggedIn} />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/event' element={<EventPage />} />
-          <Route path='/signin' element={<AuthForm />} />
-          <Route path='/profile' element={<ProtectedRoute path='/signin'><Profile /></ProtectedRoute>} />
-        </Routes>
-        <Footer />
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Router>
+          <Navbar loggedIn={loggedIn} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/event" element={<EventPage />} />
+            <Route path="/signin" element={<AuthForm />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute path="/signin">
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+          <Footer />
+        </Router>
+      </div>
+    </AuthProvider>
   );
 }
 
