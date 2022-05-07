@@ -13,7 +13,7 @@ export default function Home() {
           className="video"
           id="target"
           title="Technofete 2022"
-          src="https://www.youtube.com/embed/kRTn8bZhu0Y"
+          src="https://www.youtube.com/embed/MJmxdlCtFWU"
         ></iframe>
       </div>
       <Days />

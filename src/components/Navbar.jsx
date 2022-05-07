@@ -21,16 +21,23 @@ export default function Navbar() {
         </a>
         <ul className="navbar-nav ms-auto">
           {user ? (
-            <li className="nav-item">
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  handleLogOut();
-                }}
-              >
-                Log Out
-              </button>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link to="/profile" className="nav-link">
+                  Profile
+                </Link>
+              </li>
+              <li className="nav-item">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    handleLogOut();
+                  }}
+                >
+                  Log Out
+                </button>
+              </li>
+            </>
           ) : (
             <li className="nav-item">
               <Link to="/signin">
