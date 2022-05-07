@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import bg1 from "../assets/bg1.jpg";
 import { useAuth } from "../context/authContext";
-import toast from "react-hot-toast";
-import { useEffect } from "react";
 
 function AuthForm() {
-  const [openModal, setOpenModal] = useState(false);
   const [credentials, setCredetials] = useState({
-    rollno: "",
+    roll_no: "",
     name: "",
     email: "",
     password: "",
@@ -17,7 +14,7 @@ function AuthForm() {
   console.log(credentials);
 
   const { login, signUp } = useAuth();
-  const [noAccount, setAccount] = useState(false);
+  const [noAccount, setAccount] = useState(true);
 
   const changeModal = () => {
     setAccount(!noAccount);
@@ -28,7 +25,7 @@ function AuthForm() {
       credentials.password === credentials.retypePassword &&
       credentials.email.includes("@mcet.in")
     ) {
-      signUp(credentials.email, credentials.password);
+      signUp(credentials);
     } else {
       alert("Invalid Password");
     }
@@ -122,7 +119,7 @@ function AuthForm() {
               id="rollNumber"
               placeholder="eg: 19BCS010"
               onChange={(e) => {
-                setCredetials({ ...credentials, rollno: e.target.value });
+                setCredetials({ ...credentials, roll_no: e.target.value });
               }}
             />
           </div>

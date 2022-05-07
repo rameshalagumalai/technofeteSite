@@ -1,8 +1,8 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
 import { auth } from "../components/firebaseConfig/firebase";
 import "firebase/compat/app";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { createUser } from "../components/apiRequests/Requests.js";
 
 const AuthContext = createContext();
 
@@ -12,14 +12,13 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
-  const [isloggedin, setStatus] = useState(false);
 
-  const signUp = async (email, password) => {
+  const signUp = async (details) => {
     await auth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(details.email, details.password)
       .then((userCredentials) => {
-        toast.success("Signed In Successfully");
-        console.log(userCredentials);
+        createUser({...details, uid: userCredentials.user.uid});
+        toast.success("Account created successfully");
       })
       .catch((err) => {
         console.log(err.code);
@@ -30,6 +29,8 @@ export function AuthProvider({ children }) {
           case "auth/weak-password":
             toast.error("The password must be atlest 6 characters long.");
             break;
+          default:
+            console.log("Default");
         }
       });
   };
@@ -46,6 +47,8 @@ export function AuthProvider({ children }) {
           case "auth/wrong-password":
             toast.error("Incorrect Password");
             break;
+          default:
+            console.log("Default");
         }
         console.log(err.code);
       });
