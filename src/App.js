@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import EventPage from "./components/EventPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/authContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,6 +17,7 @@ function App() {
   return (
     <AuthProvider>
       <div className="App">
+        <Toaster></Toaster>
         <Router>
           <Navbar loggedIn={loggedIn} />
           <Routes>

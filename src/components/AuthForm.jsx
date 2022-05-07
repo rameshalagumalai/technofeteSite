@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import bg1 from "../assets/bg1.jpg";
 import { useAuth } from "../context/authContext";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 function AuthForm() {
+  const [openModal, setOpenModal] = useState(false);
   const [credentials, setCredetials] = useState({
     rollno: "",
     name: "",
@@ -14,8 +17,8 @@ function AuthForm() {
   const { login, signUp } = useAuth();
   const [noAccount, setAccount] = useState(false);
 
-  const handleLogin = () => {
-    setAccount(true);
+  const changeModal = () => {
+    setAccount(!noAccount);
   };
 
   const handleSignUp = async () => {
@@ -23,9 +26,18 @@ function AuthForm() {
       credentials.password === credentials.retypePassword &&
       credentials.email.includes("@mcet.in")
     ) {
-      await signUp(credentials.email, credentials.password);
+      setOpenModal(true);
+      let authResult = await signUp(credentials.email, credentials.password);
+      console.log(authResult);
     } else {
       alert("Invalid Password");
+    }
+  };
+
+  const handleLogin = () => {
+    if (credentials.email.includes("@mcet.in")) {
+    } else {
+      alert("Enter valid Credentials");
     }
   };
 
@@ -65,7 +77,13 @@ function AuthForm() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={() => {
+              handleLogin();
+            }}
+          >
             Log In
           </button>
           <h6 className="py-4">
@@ -73,7 +91,7 @@ function AuthForm() {
             <a
               className="fw-bold pe-auto"
               onClick={() => {
-                handleSignUp();
+                changeModal();
               }}
             >
               Sign Up
@@ -158,6 +176,8 @@ function AuthForm() {
           <button
             type="submit"
             className="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target={`${openModal ? "#loadingModal" : ""}`}
             onClick={(e) => {
               e.preventDefault();
               handleSignUp();
@@ -166,10 +186,41 @@ function AuthForm() {
             Sign Up
           </button>
           <h6 className="py-4">
-            Already have an account? <a className="fw-bold pe-auto">Log In</a>
+            Already have an account?{" "}
+            <a
+              className="fw-bold pe-auto"
+              onClick={() => {
+                changeModal();
+              }}
+            >
+              Log In
+            </a>
           </h6>
         </form>
       )}
+
+      <div
+        className="modal fade"
+        id="loadingModal"
+        tabIndex="-1"
+        aria-labelledby="loadingModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="loadingModalLabel">
+                Signing In
+              </h5>
+            </div>
+            <div className="modal-body">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
