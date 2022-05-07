@@ -14,6 +14,8 @@ function AuthForm() {
     retypePassword: "",
   });
 
+  console.log(credentials);
+
   const { login, signUp } = useAuth();
   const [noAccount, setAccount] = useState(false);
 
@@ -21,21 +23,23 @@ function AuthForm() {
     setAccount(!noAccount);
   };
 
-  const handleSignUp = async () => {
+  const handleSignUp = () => {
     if (
       credentials.password === credentials.retypePassword &&
       credentials.email.includes("@mcet.in")
     ) {
-      setOpenModal(true);
-      let authResult = await signUp(credentials.email, credentials.password);
-      console.log(authResult);
+      signUp(credentials.email, credentials.password);
     } else {
       alert("Invalid Password");
     }
   };
 
   const handleLogin = () => {
-    if (credentials.email.includes("@mcet.in")) {
+    if (
+      credentials.email.includes("@mcet.in") &&
+      credentials.password.length >= 6
+    ) {
+      login(credentials.email, credentials.password);
     } else {
       alert("Enter valid Credentials");
     }
@@ -64,6 +68,9 @@ function AuthForm() {
               className="form-control"
               id="maidid"
               aria-describedby="emailHelp"
+              onChange={(e) => {
+                setCredetials({ ...credentials, email: e.target.value });
+              }}
             />
           </div>
           <div className="container-fluid mb-3">
@@ -74,13 +81,17 @@ function AuthForm() {
               type="password"
               className="form-control"
               id="passwordfield"
+              onChange={(e) => {
+                setCredetials({ ...credentials, password: e.target.value });
+              }}
             />
           </div>
 
           <button
             type="submit"
             className="btn btn-primary"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               handleLogin();
             }}
           >
@@ -176,8 +187,6 @@ function AuthForm() {
           <button
             type="submit"
             className="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target={`${openModal ? "#loadingModal" : ""}`}
             onClick={(e) => {
               e.preventDefault();
               handleSignUp();
@@ -198,29 +207,6 @@ function AuthForm() {
           </h6>
         </form>
       )}
-
-      <div
-        className="modal fade"
-        id="loadingModal"
-        tabIndex="-1"
-        aria-labelledby="loadingModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="loadingModalLabel">
-                Signing In
-              </h5>
-            </div>
-            <div className="modal-body">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

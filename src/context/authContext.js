@@ -14,15 +14,41 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [isloggedin, setStatus] = useState(false);
 
-  const signUp = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+  const signUp = async (email, password) => {
+    await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        toast.success("Signed In Successfully");
+        console.log(userCredentials);
+      })
+      .catch((err) => {
+        console.log(err.code);
+        switch (err.code) {
+          case "auth/email-already-in-use":
+            toast.error("This email is already in use");
+            break;
+          case "auth/weak-password":
+            toast.error("The password must be atlest 6 characters long.");
+            break;
+        }
+      });
   };
 
   const login = async (email, password) => {
-    try {
-    } catch (e) {
-      return e;
-    }
+    await auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        console.log(userCredentials);
+        toast.success("Logged In");
+      })
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/wrong-password":
+            toast.error("Incorrect Password");
+            break;
+        }
+        console.log(err.code);
+      });
   };
 
   const logout = async () => {
