@@ -41,7 +41,7 @@ const EventPage = () => {
   ]);
 
   return (
-    <div className="col-lg-12 col-md-12 col-sm-12 h-auto mt-5">
+    <div className="col-lg-12 col-md-12 col-sm-12 h-auto page">
       <div
         style={{
           height: "23rem",

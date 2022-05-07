@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import toast from "react-hot-toast";
+import logo from "../assets/technofete-logo.jpeg"
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -17,12 +18,12 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-          Technofete
+        <img src={logo} alt="Technofete" className="rounded-circle" width="60" height="60" />
         </a>
         <ul className="navbar-nav ms-auto">
           {user ? (
             <>
-              <li className="nav-item">
+              <li className="nav-item me-4">
                 <Link to="/profile" className="nav-link">
                   Profile
                 </Link>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import bg1 from "../assets/bg1.jpg";
 import { useAuth } from "../context/authContext";
+import logo from "../assets/technofete-logo-2.jpeg";
 
 function AuthForm() {
   const [credentials, setCredetials] = useState({
@@ -51,10 +52,11 @@ function AuthForm() {
         backgroundSize: "cover",
         height: "100vh",
       }}
-      className="container-fluid d-flex justify-content-center align-items-center mt-5"
+      className="container-fluid d-flex justify-content-center align-items-center page"
     >
       {noAccount ? (
         <form className="col-lg-3 col-md-6 col-sm-10 m-5 bg-white h-auto rounded d-flex flex-column justify-content-around align-items-center">
+          <img className="m-auto w-50" src={logo} alt="technofete" />
           <h4 className="text-center p-3 fw-bold">Log In</h4>
           <div className="container-fluid mb-3">
             <label htmlFor="mailid" className="form-label">
@@ -82,6 +84,61 @@ function AuthForm() {
                 setCredetials({ ...credentials, password: e.target.value });
               }}
             />
+            <a
+              className="text-primary mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalCenter"
+            >
+              Forgot password?
+            </a>
+            <div
+              class="modal fade"
+              id="exampleModalCenter"
+              tabindex="-1"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">
+                      Change Password
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <label htmlFor="emailfield" className="form-label">
+                        Mail ID
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="eg: 19bcs007@mcet.in"
+                        id="emailfield"
+                      />
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Send mail
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <button

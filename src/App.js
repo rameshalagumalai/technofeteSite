@@ -4,7 +4,6 @@ import Home from "./components/home/Home";
 import Profile from "./components/Profile.jsx";
 import AuthForm from "./components/AuthForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import Footer from "./components/Footer";
 import EventPage from "./components/EventPage";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -12,22 +11,27 @@ import { AuthProvider } from "./context/authContext";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
   return (
     <AuthProvider>
       <div className="App">
         <Toaster></Toaster>
         <Router>
-          <Navbar loggedIn={loggedIn} />
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/event" element={<EventPage />} />
-            <Route path="/signin" element={<AuthForm />} />
+            <Route
+              path="/signin"
+              element={
+                <ProtectedRoute type={false} path="/profile">
+                  <AuthForm />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/profile"
               element={
-                <ProtectedRoute path="/signin">
+                <ProtectedRoute type={true} path="/signin">
                   <Profile />
                 </ProtectedRoute>
               }

@@ -7,6 +7,14 @@ nav{
   background-color: #143F6B;
 }
 
+.navbar-nav{
+  flex-direction: row;
+}
+
+.page{
+  margin-top: 5rem;
+}
+
 .row{
   margin: 0;
 }

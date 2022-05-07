@@ -1,6 +1,6 @@
 export default function Profile() {
   return (
-    <div className="section mt-5">
+    <div className="section page">
       <h2>Hello Ramesh A,</h2>
       <h4 className="text-secondary">Your events</h4>
       <div className="row">
