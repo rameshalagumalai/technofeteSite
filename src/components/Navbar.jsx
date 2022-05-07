@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/authContext";
+import toast from "react-hot-toast";
 
-export default function Navbar({ loggedIn }) {
+export default function Navbar() {
+  const { user, logout } = useAuth();
+
+  const handleLogOut = async () => {
+    toast.promise(logout(), {
+      loading: "Logging Out...",
+      success: <b>Logged Out Successfully!</b>,
+      error: <b>Could not Log Out.</b>,
+    });
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
       <div className="container-fluid">
@@ -8,11 +20,16 @@ export default function Navbar({ loggedIn }) {
           Technofete
         </a>
         <ul className="navbar-nav ms-auto">
-          {loggedIn ? (
+          {user ? (
             <li className="nav-item">
-              <Link className="nav-link" to="/profile">
-                Profile
-              </Link>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  handleLogOut();
+                }}
+              >
+                Log Out
+              </button>
             </li>
           ) : (
             <li className="nav-item">
