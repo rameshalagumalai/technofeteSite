@@ -12,8 +12,6 @@ function AuthForm() {
     retypePassword: "",
   });
 
-  console.log(credentials);
-
   const { login, signUp } = useAuth();
   const [noAccount, setAccount] = useState(true);
 
