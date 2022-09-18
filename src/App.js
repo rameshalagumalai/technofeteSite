@@ -13,6 +13,7 @@ import Test from "./components/Test";
 import SignUp from "./SignUp";
 import ScrollToTop from "./ScrollToTop.jsx";
 import ForgotPassword from "./components/ForgotPassword";
+import Organizer from "./components/Organizer";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/events/:eventId" element={<EventPage />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/organizers" element={<Organizer />} />
             <Route
               path="/sign-in"
               element={

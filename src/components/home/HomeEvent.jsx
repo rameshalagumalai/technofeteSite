@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { tConvert } from "../apiRequests/Requests";
+import eventImages from "../../EventsImages.js";
 
 export default function HomeEvent({ first, event }) {
 
@@ -10,7 +11,7 @@ export default function HomeEvent({ first, event }) {
       <div className="card">
         <div className="card-body p-0 row">
           <img
-            src="https://backlightblog.com/images/2021/04/landscape-photography-header-2000x1310.jpg"
+            src={eventImages[event.id]}
             className="col-lg-4 p-0"
             alt="event-img"
           />
