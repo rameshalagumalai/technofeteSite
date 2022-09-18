@@ -1,6 +1,13 @@
 import HomeEvent from "./HomeEvent";
 
-export default function EventCarousel({ id }) {
+export default function EventCarousel({ id, events }){
+
+  var array = [];
+
+  for(var i = 1; i < events.length; i++){
+    array.push(i);
+  }
+
   return (
     <div className="accordion-body">
       <div
@@ -17,27 +24,31 @@ export default function EventCarousel({ id }) {
             aria-current="true"
             aria-label="Slide 1"
           ></button>
-          <button
-            type="button"
-            data-bs-target={"#carouselExampleIndicators" + id} 
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target={"#carouselExampleIndicators" + id} 
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
+          {
+            array.map(arr => {
+              return (
+                <button
+                  type="button"
+                  data-bs-target={"#carouselExampleIndicators" + id} 
+                  data-bs-slide-to={arr}
+                  aria-label={"Slide "+(arr+1)}
+                ></button>
+              )
+            })
+          }
         </div>
         <div className="carousel-inner eci">
-          <HomeEvent first={" active"} />
-          <HomeEvent first={""} />
-          <HomeEvent first={""} />
+          <HomeEvent first={" active"} event={events[0]} />
+          {events.map((event, i) => {
+            if(i !== 0){
+              return <HomeEvent first={""} event={event} />
+            }
+          })}
         </div>
         <button
           className="carousel-control-prev"
           type="button"
+          style={{marginLeft: "-15%"}}
           data-bs-target={"#carouselExampleIndicators" + id} 
           data-bs-slide="prev"
         >
@@ -47,6 +58,7 @@ export default function EventCarousel({ id }) {
         <button
           className="carousel-control-next"
           type="button"
+          style={{marginRight: "-15%"}}
           data-bs-target={"#carouselExampleIndicators" + id} 
           data-bs-slide="next"
         >

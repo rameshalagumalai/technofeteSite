@@ -3,6 +3,7 @@ import { auth } from "../components/firebaseConfig/firebase";
 import "firebase/compat/app";
 import toast from "react-hot-toast";
 import { createUser } from "../components/apiRequests/Requests.js";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -12,32 +13,10 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
-
-  const signUp = async (details) => {
-    await auth
-      .createUserWithEmailAndPassword(details.email, details.password)
-      .then((userCredentials) => {
-        createUser({...details, uid: userCredentials.user.uid});
-        toast.success("Account created successfully");
-      })
-      .catch((err) => {
-        console.log(err.code);
-        switch (err.code) {
-          case "auth/email-already-in-use":
-            toast.error("This email is already in use");
-            break;
-          case "auth/weak-password":
-            toast.error("The password must be atlest 6 characters long.");
-            break;
-          default:
-            console.log("Default");
-        }
-      });
-  };
+  const [token, setToken] = useState();
 
   const login = async (email, password) => {
-    await auth
-      .signInWithEmailAndPassword(email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         console.log(userCredentials);
         toast.success("Logged In");
@@ -47,12 +26,24 @@ export function AuthProvider({ children }) {
           case "auth/wrong-password":
             toast.error("Incorrect Password");
             break;
+          case "auth/user-not-found":
+            toast.error("No user found");
+            break;
           default:
-            console.log("Default");
+            toast.error("Something Wrong");
         }
-        console.log(err.code);
       });
   };
+
+  const resetPassword = async (email) => {
+      await sendPasswordResetEmail(auth, email)
+        .then(() => {
+            toast.success("Email sent successfully, check your inbox");
+        })
+        .catch(e => {
+            toast.error(e.message);
+        });
+  }
 
   const logout = async () => {
     await auth.signOut();
@@ -62,6 +53,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user.uid);
+        user.getIdToken(true).then(idToken => setToken(idToken))
       } else {
         setUser("");
       }
@@ -72,8 +64,9 @@ export function AuthProvider({ children }) {
 
   const value = {
     user,
-    signUp,
+    token,
     login,
+    resetPassword,
     logout,
   };
 

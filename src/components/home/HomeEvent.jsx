@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { tConvert } from "../apiRequests/Requests";
 
-export default function HomeEvent({ first }) {
+export default function HomeEvent({ first, event }) {
 
   const navigate = useNavigate();
 
@@ -14,26 +15,25 @@ export default function HomeEvent({ first }) {
             alt="event-img"
           />
           <div className="col-lg-8 p-4">
-            <h5 className="card-title">Nature Event</h5>
+            <h5 className="card-title">{event.name}</h5>
             <h6 className="card-subtitle mb-2 text-muted">
-              Organized by Gyan the quiz planet
+              Organized by {event.club_name}
             </h6>
             <p className="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+              {event.description.substring(0, 94) + "..."}
             </p>
             <div className="card-details text-secondary">
               <p>
-                <i className="fas fa-map-marker"></i> A-315
+                <i className="fas fa-location-dot"></i> {event.venue}
               </p>
               <p>
-                <i className="fas fa-calendar"></i> 21 May
+                <i className="fas fa-calendar"></i> {event.date}
               </p>
               <p>
-                <i className="fas fa-clock"></i> 3:30 PM
+                <i className="fas fa-clock"></i> {tConvert(event.start_time)}
               </p>
             </div>
-            <button onClick={()=>navigate("/event")} className="btn btn-primary">
+            <button onClick={()=>navigate("/events/"+event.id)} className="btn btn-primary">
               View more
             </button>
           </div>

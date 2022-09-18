@@ -7,6 +7,26 @@ nav{
   background-color: #143F6B;
 }
 
+.f-700{
+  font-weight: 700;
+}
+
+.text-blue{
+  color: #143F6B;
+}
+
+.full-height{
+  height: 80vh;
+}
+
+.br-super{
+  border-radius: 1rem;
+}
+
+a{
+  text-decoration: none;
+}
+
 .navbar-nav{
   flex-direction: row;
 }
@@ -40,11 +60,6 @@ p{
   height: 40rem;
 }
 
-.home-event{
-  padding-left: 10%;
-  padding-right: 10%;
-}
-
 .eci{
   padding-bottom: 4rem;
 }
@@ -61,6 +76,12 @@ p{
   }
 }
 
+@media screen and (max-width: 768px) {
+  .footer-div{
+    margin-top: 3rem;
+  }
+}
+
 .footer{
-  background-color: #143F6B;
+  background-color: #3A3845;
 }

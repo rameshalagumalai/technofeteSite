@@ -9,6 +9,10 @@ import EventPage from "./components/EventPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/authContext";
 import { Toaster } from "react-hot-toast";
+import Test from "./components/Test";
+import SignUp from "./SignUp";
+import ScrollToTop from "./ScrollToTop.jsx";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -16,12 +20,14 @@ function App() {
       <div className="App">
         <Toaster></Toaster>
         <Router>
+          <ScrollToTop />
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/event" element={<EventPage />} />
+            <Route path="/events/:eventId" element={<EventPage />} />
+            <Route path="/test" element={<Test />} />
             <Route
-              path="/signin"
+              path="/sign-in"
               element={
                 <ProtectedRoute type={false} path="/profile">
                   <AuthForm />
@@ -29,9 +35,25 @@ function App() {
               }
             />
             <Route
+              path="/sign-up"
+              element={
+                <ProtectedRoute type={false} path="/profile">
+                  <SignUp />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <ProtectedRoute type={false} path="/profile">
+                  <ForgotPassword />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/profile"
               element={
-                <ProtectedRoute type={true} path="/signin">
+                <ProtectedRoute type={true} path="/sign-in">
                   <Profile />
                 </ProtectedRoute>
               }

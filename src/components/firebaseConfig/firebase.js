@@ -1,16 +1,15 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+import { getAuth } from 'firebase/auth';
 
-const app = firebase.initializeApp({
-  apiKey: "AIzaSyCrdHDObvg3CPbTHTK7U5iAdWEdD46ZiTk",
-  authDomain: "tehnofete.firebaseapp.com",
-  projectId: "tehnofete",
-  storageBucket: "tehnofete.appspot.com",
-  messagingSenderId: "50156462615",
-  appId: "1:50156462615:web:42cfbc93f1420bfcf63252",
+const app = initializeApp({
+  apiKey: "AIzaSyCLLIC34CiAE0Pn40SHa1TXs27cDMAjDY4",
+  authDomain: "student-slam.firebaseapp.com",
+  databaseURL: "https://grievances-53504-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "student-slam",
+  storageBucket: "student-slam.appspot.com",
+  messagingSenderId: "482213677623",
+  appId: "1:482213677623:web:aab0f756e15f06750a8db2",
+  measurementId: "G-VCL72Y63D0"
 });
 
-
-export const auth = app.auth();
+export const auth = getAuth(app);

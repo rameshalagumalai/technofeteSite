@@ -24,7 +24,7 @@ export default function Navbar() {
           {user ? (
             <>
               <li className="nav-item me-4">
-                <Link to="/profile" className="nav-link">
+                <Link to={"/profile"} className="nav-link">
                   Profile
                 </Link>
               </li>
@@ -41,7 +41,7 @@ export default function Navbar() {
             </>
           ) : (
             <li className="nav-item">
-              <Link to="/signin">
+              <Link to="/sign-in">
                 <button className="btn btn-primary">Sign In</button>
               </Link>
             </li>
