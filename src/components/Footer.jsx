@@ -19,7 +19,6 @@ export default function Footer() {
           <h5 className="f-700 text-light mb-3">Developers</h5>
           <a className="text-white d-block mb-2" href="https://nimalan.vercel.app/" rel="noreferrer" target="_blank"><i className="fa-solid fa-globe me-2"></i>Nimalan S (IV CSE)</a>
           <a className="text-white d-block mb-2" href="https://rameshalagumalai.com" rel="noreferrer" target="_blank"><i className="fa-solid fa-globe me-2"></i>Ramesh A (IV CSE)</a>
-          <a className="text-white d-block" href="https://www.instagram.com/stoner__" rel="noreferrer" target="_blank"><i className="fa-solid fa-globe me-2"></i>Senthamil Selvan R (IV CSE)</a>
         </div>
       </div>
     );
