@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import bg2 from "../assets/bg2.jpg";
 import { useAuth } from "../context/authContext";
 import {
   getAttributeOfUser,
@@ -19,7 +18,7 @@ const EventPage = () => {
   const [userEvents, setUserEvents] = useState([]);
   const [isAdmin, setIsAdmin] = useState(1);
 
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const [eventStatus, setEventStatus] = useState(false);
 
@@ -45,7 +44,7 @@ const EventPage = () => {
 
   async function handleRegistration() {
     if (user !== "") {
-      if (!(await newRegistration(user, eventId))) {
+      if (!(await newRegistration(user, eventId, token))) {
         toast.error("Couldn't register");
       } else {
         getEvent();

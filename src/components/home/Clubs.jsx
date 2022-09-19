@@ -68,6 +68,21 @@ const Clubs = () => {
       imageLink:
         "https://firebasestorage.googleapis.com/v0/b/tehnofete.appspot.com/o/ccc.svg?alt=media&token=0fc55470-8a3d-4d43-a76a-9bd1c9325b70",
     },
+    {
+      clubName: "yrc_rrc",
+      imageLink:
+        "https://firebasestorage.googleapis.com/v0/b/tehnofete.appspot.com/o/yrc_rrc.svg?alt=media&token=31ce5b01-65b9-4a55-9136-6e474eda4d80",
+    },
+    {
+      clubName: "ccc",
+      imageLink:
+        "https://firebasestorage.googleapis.com/v0/b/tehnofete.appspot.com/o/ccc.svg?alt=media&token=0fc55470-8a3d-4d43-a76a-9bd1c9325b70",
+    },
+    {
+      clubName: "ccc",
+      imageLink:
+        "https://firebasestorage.googleapis.com/v0/b/tehnofete.appspot.com/o/ccc.svg?alt=media&token=0fc55470-8a3d-4d43-a76a-9bd1c9325b70",
+    },
   ]);
 
   return (

@@ -15,9 +15,9 @@ export default function SignUp() {
   const [credentials, setCredentials] = useState({
     rollno: "19BCS010",
     name: "Nimalan S",
-    email: "19bcs007@mcet.in",
-    password: "bowbowbow",
-    confirmPassword: "bowbowbow",
+    email: "19bcs010@mcet.in",
+    password: "Super@23",
+    confirmPassword: "Super@23",
   });
 
   function handleInput(e) {

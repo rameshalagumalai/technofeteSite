@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import { getAttributeOfUser } from "./apiRequests/Requests";
+import EventAdmin from "./EventAdmin";
 import Loader from "./Loader.jsx";
-import Organizer from "./Organizer";
 import UserEventCard from "./UserEventCard";
 
 export default function Profile() {
@@ -45,7 +45,7 @@ export default function Profile() {
       );
     }else{
       return (
-        <Organizer user={result} />
+        <EventAdmin user={result} />
       )
     }
   }else{

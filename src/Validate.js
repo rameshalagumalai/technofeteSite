@@ -12,9 +12,9 @@ export const checkPasswordMatch = (password, retypedPassword) => {
   }
 };
 
-//check roll no with college email id
 export const checkUniqueRollNumber = (rollno, email) => {
-  let rollNumberFromEmail = email.substring(0, 8);
+  let rollNumberFromEmail = email.substring(0, email.indexOf("@"));
+  console.log(rollNumberFromEmail.toUpperCase() + " " + rollno.toUpperCase())
   if (rollNumberFromEmail.toUpperCase() === rollno.toUpperCase()) {
     return true;
   } else {

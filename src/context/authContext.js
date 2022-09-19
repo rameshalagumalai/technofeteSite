@@ -2,7 +2,6 @@ import React, { useContext, createContext, useState, useEffect } from "react";
 import { auth } from "../components/firebaseConfig/firebase";
 import "firebase/compat/app";
 import toast from "react-hot-toast";
-import { createUser } from "../components/apiRequests/Requests.js";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 
 const AuthContext = createContext();

@@ -104,7 +104,7 @@ export default function Navbar() {
           ) : (
             <li className="nav-item">
               <Link
-                to="/signin"
+                to="/sign-in"
                 onClick={() => {
                   toggleIcon();
                 }}

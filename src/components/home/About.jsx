@@ -3,7 +3,7 @@ export default function About(){
     return (
         <div className="section">
             <h3 className="f-700">About Technofete</h3>
-            <p className="m-0">Technofete'22 is an inter college colloquium going to held on 23rd and
+            <p className="m-0">Technofete'22 is an intra college colloquium going to held on 23rd and
         and 24th of September 2022, organized by students of Dr. Mahalingam College of
         Engineering and Technology, for Students from various streams.
         Technofete'22 serves as a platform for the students to expose their

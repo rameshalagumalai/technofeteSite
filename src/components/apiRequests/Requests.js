@@ -8,7 +8,15 @@ export async function createUser(details) {
 
   await createUserWithEmailAndPassword(auth, details.email, details.password)
     .then(async (cred) => {
-      userData = { ...userData, ["userid"]: cred.user.uid, ["isAdmin"]: 0 };
+      var token = "";
+      await cred.user.getIdToken(false)
+        .then(idToken => {
+          token = idToken;
+        })
+        .catch(e => {
+          console.log(e.message);
+        })
+      userData = { ...userData, ["userid"]: cred.user.uid, ["isAdmin"]: 0, token };
       await axios
         .post("http://localhost:5000/users", userData)
         .then(({ data }) => {
@@ -78,10 +86,10 @@ export async function getUserDetails(id) {
   return result;
 }
 
-export async function newRegistration(userId, eventId) {
+export async function newRegistration(userId, eventId, token) {
   var success = true;
   await axios
-    .post("http://localhost:5000/registrations", { userId, eventId })
+    .post("http://localhost:5000/registrations", { userId, eventId, token })
     .then(({ data }) => {
       switch (data) {
         case 1:
