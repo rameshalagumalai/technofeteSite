@@ -13,6 +13,8 @@ export const useAuth = () => {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+  const [currentUser, setCurrentUser] = useState();
+  const [createdUser, setCreatedUser] = useState();
 
   const login = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password)
@@ -51,6 +53,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        setCurrentUser(user);
         setUser(user.uid);
         user.getIdToken(true).then(idToken => setToken(idToken))
       } else {
@@ -62,6 +65,9 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = {
+    createdUser,
+    setCreatedUser,
+    currentUser,
     user,
     token,
     login,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth } from "../firebaseConfig/firebase";
 

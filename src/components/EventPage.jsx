@@ -76,27 +76,34 @@ const EventPage = () => {
               {"Conducted by " + event.club_name}
             </p>
           </div>
-          {event.total_seats > 0 && isAdmin === 0 && (
             <div className="col-sm-6 text-end ms-auto">
-              <p className="ms-auto text-white text-end">
-                {"Registrations Available: " + event.total_seats}
-              </p>
-              {userEvents.length === 0 ? (
-                <button
-                  type="button"
-                  className="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#confirmRegistrationModal"
-                >
-                  Register
-                </button>
-              ) : (
-                <button className="btn btn-secondary" disabled>
-                  Already registered
-                </button>
-              )}
+              {event.isOpen === 1 ?
+                (event.total_seats > 0 && isAdmin !== 1 && (
+                <>
+                  <p className="text-white text-end">
+                    {"Registrations Available: " + event.total_seats}
+                  </p>
+                  {userEvents.length === 0 ? (
+                    <button
+                      type="button"
+                      className="btn btn-primary m-2"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmRegistrationModal"
+                    >
+                      Register
+                    </button>
+                  ) : (
+                    <button className="btn btn-secondary" disabled>
+                      Already registered
+                    </button>
+                  )}
+                </>)):
+                <div className="text-end text-white">
+                  <p className="text-end">Registrations start on</p>
+                  <h4>September 23</h4>
+                </div>
+              }
             </div>
-          )}
         </div>
       </div>
       <div

@@ -14,6 +14,7 @@ import SignUp from "./SignUp";
 import ScrollToTop from "./ScrollToTop.jsx";
 import ForgotPassword from "./components/ForgotPassword";
 import Organizer from "./components/Organizer";
+import SetUpProfile from "./components/SetUpProfile";
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
               element={
                 <ProtectedRoute type={false} path="/profile">
                   <ForgotPassword />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/set-up-profile"
+              element={
+                <ProtectedRoute type={false} path="/profile">
+                  <SetUpProfile />
                 </ProtectedRoute>
               }
             />
