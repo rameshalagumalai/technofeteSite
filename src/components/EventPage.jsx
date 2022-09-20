@@ -82,7 +82,7 @@ const EventPage = () => {
             </p>
           </div>
             <div className="col-sm-6 text-end ms-auto">
-              {event.isOpen === 1 ?
+              {event.isOpen === 0 ?
                 (event.total_seats > 0 && isAdmin !== 1 && (
                 <>
                   <p className="text-white text-end">
