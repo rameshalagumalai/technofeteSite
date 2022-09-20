@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getAttributeOfUser } from "./apiRequests/Requests";
 import EventAdmin from "./EventAdmin";
@@ -7,8 +9,10 @@ import UserEventCard from "./UserEventCard";
 
 export default function Profile() {
 
-  const { user } = useAuth();
-  const [result, setResult] = useState()
+  const { user, currentUser } = useAuth();
+  const [result, setResult] = useState();
+
+  const navigate = useNavigate();
 
   const [events, setEvents] = useState(null);
 
@@ -17,6 +21,10 @@ export default function Profile() {
       if(user){
         setResult(await getAttributeOfUser(user, "name"));
         setEvents(await getAttributeOfUser(user, "events"));
+        if(result === "No"){
+          navigate("/set-up-profile");
+          return;
+        }
       }
     }
     getUserName();

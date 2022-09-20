@@ -15,10 +15,6 @@ export default function Navbar() {
     });
   };
 
-  const scrollToEvents = (id) => {
-    document.getElementById(id).scrollIntoView();
-  };
-
   const toggleIcon = () => {
     setIconChange(!iconChange);
   };
@@ -102,16 +98,29 @@ export default function Navbar() {
               </div>
             </>
           ) : (
-            <li className="nav-item">
-              <Link
-                to="/sign-in"
-                onClick={() => {
-                  toggleIcon();
-                }}
-              >
-                <button className="btn btn-primary">Sign In</button>
-              </Link>
-            </li>
+            <>
+              <li className="nav-item me-4">
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item me-4">
+                <Link to="/organizers" className="nav-link">
+                  Organizers
+                </Link>
+              </li>
+              <li className="nav-item">
+
+                <Link
+                  to="/sign-in"
+                  onClick={() => {
+                    toggleIcon();
+                  }}
+                >
+                  <button className="btn btn-primary">Sign In</button>
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </div>

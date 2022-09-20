@@ -17,6 +17,7 @@ import Organizer from "./components/Organizer";
 import SetUpProfile from "./components/SetUpProfile";
 
 function App() {
+
   return (
     <AuthProvider>
       <div className="App">
@@ -56,7 +57,7 @@ function App() {
             <Route
               path="/set-up-profile"
               element={
-                <ProtectedRoute type={false} path="/profile">
+                <ProtectedRoute type={true} path="/sign-in">
                   <SetUpProfile />
                 </ProtectedRoute>
               }

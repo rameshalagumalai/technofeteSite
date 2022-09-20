@@ -55,6 +55,7 @@ export function AuthProvider({ children }) {
       if (user) {
         setCurrentUser(user);
         setUser(user.uid);
+        console.log(user.emailVerified);
         user.getIdToken(true).then(idToken => setToken(idToken))
       } else {
         setUser("");
@@ -68,6 +69,7 @@ export function AuthProvider({ children }) {
     createdUser,
     setCreatedUser,
     currentUser,
+    setCurrentUser,
     user,
     token,
     login,

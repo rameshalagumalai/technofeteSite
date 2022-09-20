@@ -26,7 +26,7 @@ export default function Home() {
               className="video"
               id="target"
               title="Technofete 2022"
-              src="https://www.youtube.com/embed/YXY74kWderc"
+              src="https://www.youtube.com/embed/3yimBysI63M"
             ></iframe>
           </div>
           <Days events={events} />

@@ -1,36 +1,26 @@
 import axios from "axios";
-import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig/firebase";
 
-export async function createUser(details) {
-  var userData = details;
-
-  await createUserWithEmailAndPassword(auth, details.email, details.password)
+export async function createUser(email) {
+  var user;
+  var ok = false;
+  await createUserWithEmailAndPassword(auth, email, email)
     .then(async (cred) => {
-      var token = "";
-      await cred.user.getIdToken(false)
-        .then(idToken => {
-          token = idToken;
-        })
-        .catch(e => {
-          console.log(e.message);
-        })
-      userData = { ...userData, ["userid"]: cred.user.uid, ["isAdmin"]: 0, token };
-      await axios
-        .post("http://localhost:5000/users", userData)
-        .then(({ data }) => {
-          if (data === "Yes") {
-            toast.success(
-              "Account created successfully, Welcome " + userData.name
-            );
-          } else {
-            toast.error("There was problem in creating the account");
-          }
-        })
-        .catch((e) => {
-          toast.error(e.code);
-        });
+      user = cred.user;
+      ok = true;
+        sendEmailVerification(user)
+          .then(() => {
+            toast.success("Verification link sent to your mail");
+          })
+          .catch(e => {
+            ok = false;
+            deleteUser(user);
+            toast.error(e.message);
+          });
+      return ok;    
     })
     .catch((err) => {
       console.log(err);
@@ -45,6 +35,26 @@ export async function createUser(details) {
           console.log("Default");
       }
     });
+}
+
+export async function addNewUser(details){
+      var ok = false;
+      await axios
+        .post("http://localhost:5000/users", details)
+        .then(async ({ data }) => {
+          if (data === "Yes") {
+            ok = true;
+            toast.success(
+              "Account created successfully, Welcome " + details.name
+            );
+          } else {
+            toast.error("There was problem in creating the account");
+          }
+        })
+        .catch((e) => {
+          toast.error(e.code);
+        });
+      return ok;  
 }
 
 export async function getSpecificEvent(eventId) {

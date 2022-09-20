@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { getEventRegistrations, getSpecificEvent, tConvert } from "./apiRequests/Requests";
 import DetailCard from "./DetailCard";
 import Loader from "./Loader";
@@ -8,9 +9,14 @@ export default function EventAdmin({ user }){
     const [event, setEvent] = useState({});
     const [registrations, setRegistrations] = useState([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         async function getEventDetails(){
-            console.log(user);
+            if(user === "No"){
+                navigate("/set-up-profile");
+                return;
+            }
             setEvent(await getSpecificEvent(user.rollNumber));
             setRegistrations(await getEventRegistrations(user.rollNumber));
         }

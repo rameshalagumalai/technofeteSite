@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-const app = initializeApp({
+export const app = initializeApp({
   apiKey: "AIzaSyCrdHDObvg3CPbTHTK7U5iAdWEdD46ZiTk",
   authDomain: "tehnofete.firebaseapp.com",
   projectId: "tehnofete",

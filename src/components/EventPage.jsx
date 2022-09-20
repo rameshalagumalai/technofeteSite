@@ -18,7 +18,7 @@ const EventPage = () => {
   const [userEvents, setUserEvents] = useState([]);
   const [isAdmin, setIsAdmin] = useState(1);
 
-  const { user, token } = useAuth();
+  const { user, currentUser, token } = useAuth();
 
   const [eventStatus, setEventStatus] = useState(false);
 
@@ -44,11 +44,16 @@ const EventPage = () => {
 
   async function handleRegistration() {
     if (user !== "") {
-      if (!(await newRegistration(user, eventId, token))) {
-        toast.error("Couldn't register");
-      } else {
-        getEvent();
-        getUserEvents();
+      console.log(currentUser.emailVerified);
+      if(currentUser.emailVerified){
+        if (!(await newRegistration(user, eventId, token))) {
+          toast.error("Couldn't register");
+        } else {
+          getEvent();
+          getUserEvents();
+        }
+      }else{
+        toast.error("Email not verified yet")
       }
     } else {
       toast.error("Sign in to register");
