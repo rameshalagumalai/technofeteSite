@@ -23,10 +23,16 @@ export default function Home() {
           <About />
           <div className="section text-center">
             <iframe
-              className="video"
+              className="video mb-5"
               id="target"
               title="Technofete 2022"
               src="https://www.youtube.com/embed/3yimBysI63M"
+            ></iframe>
+            <iframe
+              className="video"
+              id="target"
+              title="Technofete 2022"
+              src="https://www.youtube.com/embed/oh53uHsXflY"
             ></iframe>
           </div>
           <Days events={events} />

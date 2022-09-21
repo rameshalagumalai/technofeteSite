@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Organizer() {
-  const [oraganizers, setOraganizers] = useState([
+  const [oraganizers] = useState([
     {
       name: "Dr. A. Rathinavelu",
       designation: "Principal",
@@ -19,7 +19,7 @@ export default function Organizer() {
     {
       name: "Dr. A. Sakthivel",
       designation: "SPICES Coordinator",
-      imageLink: "",
+      imageLink: "https://firebasestorage.googleapis.com/v0/b/tehnofete.appspot.com/o/sakthivel_sir.jpeg?alt=media&token=021569b5-8dc4-4b4a-bfe9-19ee0b4dd31f",
       class: "",
     },
     {
@@ -74,7 +74,7 @@ export default function Organizer() {
     },
   ]);
 
-  const [sgsList, setSgsList] = useState([
+  const [sgsList] = useState([
     { name: "Sanjay K", designation: "Joint Secretary", dept: "Mech" },
     { name: "Subhiksha K", designation: "Circuit Stream PC", dept: "EEE" },
     {
@@ -134,21 +134,21 @@ export default function Organizer() {
     <div className="page d-flex flex-column justify-content-center align-items-center">
       <div className="col-lg-10">
         <div className="w-100 mx-3 my-4">
-          <h3 className="fw-bold">Techofete Organizers</h3>
+          <h3 className="fw-bold">Technofete Organizers</h3>
         </div>
         <div className="w-100 d-flex flex-wrap justify-content-around">
-          {oraganizers.map((val) => (
-            <div class="card my-3 mx-2" style={{ width: "18rem" }}>
+          {oraganizers.map((val, i) => (
+            <div key={i} className="card my-3 mx-2" style={{ width: "18rem" }}>
               <img
                 src={val.imageLink}
                 style={{ height: "18rem" }}
-                class="card-img-top"
+                className="card-img-top"
                 alt="..."
               />
-              <div class="card-body">
-                <h5 class="card-title">{val.name}</h5>
-                <p class="card-text m-0">{val.designation}</p>
-                <p class="card-text m-0">{val.class}</p>
+              <div className="card-body">
+                <h5 className="card-title">{val.name}</h5>
+                <p className="card-text m-0">{val.designation}</p>
+                <p className="card-text m-0">{val.class}</p>
               </div>
             </div>
           ))}
@@ -156,11 +156,11 @@ export default function Organizer() {
       </div>
       <div className="col-lg-10">
         <h3 className="fw-bold">SGS Members</h3>
-        <ol class="list-group list-group-numbered my-2">
-          {sgsList.map((val) => (
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">{val.name}</div>
+        <ol className="list-group list-group-numbered my-2">
+          {sgsList.map((val, i) => (
+            <li key={i} className="list-group-item d-flex justify-content-between align-items-start">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">{val.name}</div>
                 {val.designation} - {val.dept}
               </div>
             </li>

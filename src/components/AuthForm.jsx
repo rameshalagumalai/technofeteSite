@@ -4,13 +4,14 @@ import { useAuth } from "../context/authContext";
 import logo from "../assets/technofete-logo-2.jpeg";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import {validate} from "../Validate";
 
 function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [clicked, setClicked] = useState(false);
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
+    setClicked(true);
     e.preventDefault();
     if (email === "") {
       toast.error("Email is empty");
@@ -21,12 +22,13 @@ function AuthForm() {
         if (
           email.match("^[a-z0-9](\\.?[a-z0-9]){5,}@mcet|@drmcet\\.in|.ac.in$")
         ) {
-          login(email, password);
+          await login(email, password);
         } else {
           toast.error("Enter your college email id");
         }
       }
     }
+    setClicked(false);
   }
 
   const { login } = useAuth();
@@ -72,9 +74,13 @@ function AuthForm() {
         />
         <div className="d-flex mt-4 align-items-center">
           <Link to="/forgot-password">Forgot password?</Link>
-          <button type="submit" className="btn btn-success ms-auto">
+          {!clicked ? <button type="submit" className="btn btn-success ms-auto">
             Log in
-          </button>
+          </button>:
+          <button className="btn btn-success ms-auto" type="button" disabled>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Signing in...
+          </button>}
         </div>
         <p className="text-center mt-5">
           New user? <Link to="/sign-up">Sign up</Link>

@@ -27,10 +27,6 @@ a{
   text-decoration: none;
 }
 
-.navbar-nav{
-  flex-direction: row;
-}
-
 .page{
   margin-top: 5rem;
 }
@@ -41,10 +37,6 @@ a{
 
 p{
   text-align: justify;
-}
-
-.nav-link{
-  margin-bottom: 0;
 }
 
 .h-c{
@@ -84,4 +76,8 @@ p{
 
 .footer{
   background-color: #3A3845;
+}
+
+.navbar-nav{
+  align-items: center;
 }

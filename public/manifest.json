@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "T'fete'22",
+  "name": "Technofete'22",
+  "homepage": "https://www.technofete.in",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#143F6B",
   "background_color": "#ffffff"
 }

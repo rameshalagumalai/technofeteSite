@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        console.log(userCredentials);
         toast.success("Logged In");
       })
       .catch((err) => {
@@ -39,7 +38,7 @@ export function AuthProvider({ children }) {
   const resetPassword = async (email) => {
       await sendPasswordResetEmail(auth, email)
         .then(() => {
-            toast.success("Email sent successfully, check your inbox");
+            toast.success("Email sent successfully, check for the mail in your junk section");
         })
         .catch(e => {
             toast.error(e.message);
@@ -55,7 +54,6 @@ export function AuthProvider({ children }) {
       if (user) {
         setCurrentUser(user);
         setUser(user.uid);
-        console.log(user.emailVerified);
         user.getIdToken(true).then(idToken => setToken(idToken))
       } else {
         setUser("");

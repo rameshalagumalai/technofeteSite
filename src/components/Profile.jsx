@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getAttributeOfUser } from "./apiRequests/Requests";
@@ -9,7 +8,7 @@ import UserEventCard from "./UserEventCard";
 
 export default function Profile() {
 
-  const { user, currentUser } = useAuth();
+  const { user } = useAuth();
   const [result, setResult] = useState();
 
   const navigate = useNavigate();
@@ -53,7 +52,7 @@ export default function Profile() {
       );
     }else{
       return (
-        <EventAdmin user={result} />
+        <EventAdmin admin={result} />
       )
     }
   }else{

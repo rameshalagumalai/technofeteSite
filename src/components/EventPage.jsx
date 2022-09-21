@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import {
   getAttributeOfUser,
@@ -11,16 +10,18 @@ import {
 import DetailCard from "./DetailCard";
 import Loader from "./Loader.jsx";
 import eventImages from "../EventsImages.js";
+import { useParams } from "react-router-dom";
 
 const EventPage = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState({});
   const [userEvents, setUserEvents] = useState([]);
   const [isAdmin, setIsAdmin] = useState(1);
+  const [clicked, setClicked] = useState(false);
 
   const { user, currentUser, token } = useAuth();
 
-  const [eventStatus, setEventStatus] = useState(false);
+  const [eventStatus] = useState(false);
 
   useEffect(() => {
     getEvent();
@@ -43,16 +44,16 @@ const EventPage = () => {
   }
 
   async function handleRegistration() {
+    setClicked(true);
     if (user !== "") {
-      console.log(currentUser.emailVerified);
-      if(currentUser.emailVerified){
+      if (currentUser.emailVerified) {
         if (!(await newRegistration(user, eventId, token))) {
           toast.error("Couldn't register");
         } else {
-          getEvent();
-          getUserEvents();
+          await getEvent();
+          await getUserEvents();
         }
-      }else{
+      } else {
         toast.error("Email not verified yet")
       }
     } else {
@@ -81,10 +82,11 @@ const EventPage = () => {
               {"Conducted by " + event.club_name}
             </p>
           </div>
-            <div className="col-sm-6 text-end ms-auto">
-              {event.isOpen === 0 ?
-                (event.total_seats > 0 && isAdmin !== 1 && (
-                <>
+          <div className="col-sm-3 d-flex flex-column justify-content-around align-items-end ms-auto">
+            {event.isOpen === 1 ?
+              (event.total_seats > 0 && isAdmin !== 1 && (
+
+                <div className="d-flex flex-column justify-content-end align-items-end">
                   <p className="text-white text-end">
                     {"Registrations Available: " + event.total_seats}
                   </p>
@@ -98,17 +100,19 @@ const EventPage = () => {
                       Register
                     </button>
                   ) : (
-                    <button className="btn btn-secondary" disabled>
+                    <button className="btn btn-secondary mb-2" disabled>
                       Already registered
                     </button>
                   )}
-                </>)):
-                <div className="text-end text-white">
-                  <p className="text-end">Registrations start on</p>
-                  <h4>September 23</h4>
                 </div>
-              }
-            </div>
+              )) :
+              <div className="text-end text-white">
+                <p className="text-end">Registrations start soon</p>
+              </div>
+            }
+            {event.doc !== "" && <a href={event.doc} target="_blank" rel="noreferrer" className="btn btn-warning text-white mb-2">View poster</a>}
+
+          </div>
         </div>
       </div>
       <div
@@ -134,25 +138,6 @@ const EventPage = () => {
           <DetailCard icon={"phone"} detail={event.phone} />
         </div>
       </div>
-      {event.total_seats > 0 && (
-        <div className="container-fluid text-center">
-          {userEvents.length === 0 ? (
-            <button
-              type="button"
-              className="btn btn-lg btn-primary h-25 m-5"
-              data-bs-toggle="modal"
-              data-bs-target="#confirmRegistrationModal"
-            >
-              Register
-            </button>
-          ) : (
-            <button className="btn btn-secondary btn-lg h-25 m-5" disabled>
-              Already registered
-            </button>
-          )}
-        </div>
-      )}
-
       <div
         className="modal fade"
         id="confirmRegistrationModal"
@@ -169,6 +154,7 @@ const EventPage = () => {
               <button
                 type="button"
                 id="eventRegClose"
+                onClick={() => setClicked(false)}
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
@@ -209,25 +195,19 @@ const EventPage = () => {
             </div>
 
             <div className="modal-footer">
-              {eventStatus ? (
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    handleRegistration();
-                  }}
-                >
-                  Confirm
-                </button>
-              )}
+              {!clicked ? <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  handleRegistration();
+                }}
+              >
+                Confirm
+              </button> :
+                <button className="btn btn-primary ms-auto" type="button" disabled>
+                  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Registering...
+                </button>}
             </div>
           </div>
         </div>

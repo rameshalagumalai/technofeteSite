@@ -9,22 +9,26 @@ export default function SignUp() {
 
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
+  const [clicked, setClicked] = useState(false);
 
   async function handleSignUp(e) {
+    setClicked(true);
     e.preventDefault();
-        if (email === "") {
-          toast.error("Email is empty");
-        } else {
-          if (!email.match("^[a-z0-9](\\.?[a-z0-9]){5,}@mcet\\.in$")) {
-            toast.error("Enter your college email id");
-          } else {
-            if(await createUser(email)){
-              navigate("/set-up-profile");
-            }
-          }
+    if (email === "") {
+      console.log("Empty");
+      toast.error("Email is empty");
+    } else {
+      if (!email.match("^[a-z0-9](\\.?[a-z0-9]){5,}@mcet\\.in$")) {
+        toast.error("Enter your college email id");
+      } else {
+        if (await createUser(email)) {
+          navigate("/set-up-profile");
         }
-  }  
+      }
+    };
+    setClicked(false);
+  }
 
   return (
     <div
@@ -56,9 +60,13 @@ export default function SignUp() {
         />
         <div className="d-flex mt-4 align-items-center mb-3">
           <Link to="/sign-in">Back to sign in</Link>
-          <button type="submit" className="btn btn-success ms-auto">
+          {!clicked ? <button type="submit" className="btn btn-success ms-auto">
             Yes, I'm in
-          </button>
+          </button> :
+            <button className="btn btn-success ms-auto" type="button" disabled>
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Signing up...
+            </button>}
         </div>
       </form>
     </div>

@@ -31,7 +31,7 @@ export default function HomeEvent({ first, event }) {
                 <i className="fas fa-calendar"></i> {event.date}
               </p>
               <p>
-                <i className="fas fa-clock"></i> {tConvert(event.start_time)}
+                <i className="fas fa-clock"></i> {tConvert(event.start_time.substring(0, 5))}
               </p>
             </div>
             <button onClick={()=>navigate("/events/"+event.id)} className="btn btn-primary">

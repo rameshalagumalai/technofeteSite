@@ -14,14 +14,14 @@ export default function Carousel() {
       >
         <div className="carousel-item active">
           <img
-            src="https://beta.mcet.in/wp-content/uploads/2022/05/slider1.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/tehnofete.appspot.com/o/banner.svg?alt=media&token=832186b2-a0d3-4569-a07e-b31e60617ab8"
             className="d-block w-100"
             alt="..."
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://beta.mcet.in/wp-content/uploads/2022/05/slider4.jpg"
+            src="https://beta.mcet.in/wp-content/uploads/2022/05/slider1.jpg"
             className="d-block w-100"
             alt="..."
           />

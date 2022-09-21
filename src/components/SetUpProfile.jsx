@@ -11,16 +11,18 @@ import { sendEmailVerification, signInWithEmailAndPassword, updatePassword } fro
 
 export default function SetUpProfile(){
 
-    const [name, setName] = useState("Nimalan S");
-    const [phoneNumber, setPhoneNumber] = useState("9876543210");
+    const [name, setName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [clicked, setClicked] = useState(false);
 
     const { currentUser, setCurrentUser, token } = useAuth();
 
     const navigate = useNavigate();
  
     async function handleSetUp(e){
+      setClicked(true);
         e.preventDefault();
         if(validateName(name)){
           if(phoneNumber.length === 10){
@@ -35,7 +37,7 @@ export default function SetUpProfile(){
                       .then(async () => {
                             const details = {
                             userid: currentUser.uid,
-                            rollno: currentUser.email.substring(0, currentUser.email.indexOf('@')),
+                            rollno: currentUser.email.substring(0, currentUser.email.indexOf('@')).toUpperCase(),
                             name,
                             email: currentUser.email,
                             phoneNumber,
@@ -57,7 +59,6 @@ export default function SetUpProfile(){
                     }
                 })
                 .catch(e => {
-                  console.log(e.message);
                 })
               }else{
                 toast.error("Passwords don't match");
@@ -71,6 +72,7 @@ export default function SetUpProfile(){
         }else{
           toast.error("Invalid name");
         }
+        setClicked(false);
     }
 
     async function sendVerification(){
@@ -145,10 +147,14 @@ export default function SetUpProfile(){
           placeholder="Re-type the password"
         />
         <div className="d-flex mt-4 align-items-center mb-3">
-          <a onClick={() => sendVerification()} className="text-primary" style={{cursor: "pointer"}}>Resend verification email</a>
-          <button type="submit" className="btn btn-success ms-auto">
+          <button onClick={() => sendVerification()} className="btn btn-link" style={{cursor: "pointer"}}>Resend verification email</button>
+          {!clicked ? <button type="submit" className="btn btn-success ms-auto">
             Set Up
-          </button>
+          </button>:
+          <button className="btn btn-success ms-auto" type="button" disabled>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Setting up...
+          </button>}
         </div>
       </form>
     </div>

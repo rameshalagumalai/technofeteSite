@@ -30,7 +30,7 @@ const Sponsors = () => {
             className="col-lg-4 text-center d-flex justify-content-center align-items-center mt-2"
             key={key}
           >
-            <img className="" src={link.imageLink} />
+            <img className="" src={link.imageLink} alt="" />
           </div>
         ))}
       </div>

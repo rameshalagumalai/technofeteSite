@@ -1,5 +1,4 @@
 export const validatePassword = (password) => {
-  console.log(password);
   let regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return regex.test(password);
 };
@@ -14,7 +13,6 @@ export const checkPasswordMatch = (password, retypedPassword) => {
 
 export const checkUniqueRollNumber = (rollno, email) => {
   let rollNumberFromEmail = email.substring(0, email.indexOf("@"));
-  console.log(rollNumberFromEmail.toUpperCase() + " " + rollno.toUpperCase())
   if (rollNumberFromEmail.toUpperCase() === rollno.toUpperCase()) {
     return true;
   } else {

@@ -8,18 +8,21 @@ import { Link } from "react-router-dom";
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const { resetPassword } = useAuth();
+  const [clicked, setClicked] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    setClicked(true);
     e.preventDefault();
     if (email === "") {
       toast.error("Email is empty");
     } else {
       if (email.match("^[a-z0-9](\\.?[a-z0-9]){5,}@mcet\\.in$")) {
-        resetPassword(email);
+        await resetPassword(email);
       } else {
         toast.error("Enter your college email id");
       }
     }
+    setClicked(false);
   }
 
   return (
@@ -56,9 +59,13 @@ export default function ForgotPassword() {
         />
         <div className="d-flex mt-4 align-items-center">
           <Link to="/sign-in">Back to sign in</Link>
-          <button type="submit" className="btn btn-success ms-auto">
+          {!clicked ? <button type="submit" className="btn btn-success ms-auto">
             Send
-          </button>
+          </button>:
+          <button className="btn btn-success ms-auto" type="button" disabled>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Sending...
+          </button>}
         </div>
         <p className="text-center mt-5">
           New user? <Link to="/sign-up">Sign up</Link>

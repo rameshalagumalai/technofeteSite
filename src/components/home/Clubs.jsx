@@ -93,7 +93,7 @@ const Clubs = () => {
       <div className="scroll my-5" id="container">
         <div className="i-scroll">
           {imageLinks.map((link, key) => (
-            <img key={key} style={{ width: "200px" }} src={link.imageLink} />
+            <img key={key} style={{ width: "200px" }} src={link.imageLink} alt="" />
           ))}
         </div>
       </div>

@@ -23,9 +23,10 @@ export default function EventCarousel({ id, events }) {
             aria-current="true"
             aria-label="Slide 1"
           ></button>
-          {array.map((arr) => {
+          {array.map((arr, i) => {
             return (
               <button
+                key={i}
                 type="button"
                 data-bs-target={"#carouselExampleIndicators" + id}
                 data-bs-slide-to={arr}
@@ -38,7 +39,7 @@ export default function EventCarousel({ id, events }) {
           <HomeEvent first={" active"} event={events[0]} />
           {events.map((event, i) => {
             if (i !== 0) {
-              return <HomeEvent first={""} event={event} />;
+              return <HomeEvent key={i} first={""} event={event} />;
             }
           })}
         </div>
